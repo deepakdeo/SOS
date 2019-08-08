@@ -1,4 +1,4 @@
-# SOS
+# SOS: SKA Observation Simulator
 
 SOS contains
 

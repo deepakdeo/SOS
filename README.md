@@ -12,10 +12,11 @@ SOS contains
 
 *SOS works in CASA 4.7.2 or earlier.*
 
-==============
-Authors of SOS
-==============
+Authors of SOS:
+----------------
 
-Deepak Deo and Dr. Ruta Kale (NCRA-TIFR)
+Deepak Deo and Dr. Ruta Kale
+
 #Last updated: April 12, 2017
+
 Last updated: Aug. 8, 2019

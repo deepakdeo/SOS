@@ -20,6 +20,3 @@ Authors of SOS:
 
 Deepak Deo and Dr. Ruta Kale
 
-#Last updated: April 12, 2017
-
-Last updated: Aug. 8, 2019

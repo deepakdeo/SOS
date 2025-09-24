@@ -3,7 +3,13 @@
 It simulates SKA1_Mid visibility (radio observation) for a given radio sky. Simulator uses python and CASA-toolkit
 for simulation. It needs to be run within CASA and at the moment is compatible with CASA version 4.7.2 or earlier.
 CASA compatible SKA1_Mid configuration file is provided here which contains coordinates of the telescope that we knew were
-part of SKA1_Mid until mid 2017.  
+part of SKA1_Mid until mid 2017. 
+
+<p align="center">
+  <img src="ska_uv.png" alt="SKA UV Coverage" width="500"/>
+  <br>
+  <em>Figure: UV coverage from 15 min of simulated observation out of SKA1_Mid.</em>
+</p>
 
 SOS contains
 --------------

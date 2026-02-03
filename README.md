@@ -264,10 +264,8 @@ See [examples/](examples/) directory for complete examples:
 
 ## References
 
-- **Cosmology**: Schneider et al. (2006) "Extragalactic Astronomy and Cosmology"
 - **SKA**: Square Kilometre Array - https://www.skao.org/
 - **CASA**: Common Astronomy Software Applications - https://casa.nrao.edu/
-- **Planck 2015**: Planck Collaboration et al. (2016) A&A 594, A13
 
 ## License
 

@@ -1,0 +1,18 @@
+# Dependencies for SOS (SKA Observation Simulator)
+# Install with: pip install -r requirements.txt
+
+# Core dependencies
+numpy>=1.19.0
+PyYAML>=5.3
+
+# Development dependencies (optional)
+# Uncomment to install: pip install -r requirements.txt -e ".[dev]"
+# pytest>=6.0
+# pytest-cov>=2.10
+# black>=21.0
+# flake8>=3.9
+# mypy>=0.910
+# isort>=5.9
+
+# Note: CASA toolkit must be installed separately in its environment
+# The package will detect CASA availability at runtime

@@ -1,49 +1,92 @@
-# SOS: SKA Observation Simulator
+# SOS: SKA Observation Simulator v2.0
 
-It simulates SKA1_Mid visibility (radio observation) for a given radio sky. Simulator uses python and CASA-toolkit
-for simulation. It needs to be run within CASA and at the moment is compatible with CASA version 4.7.2 or earlier.
-CASA compatible SKA1_Mid configuration file is provided here which contains coordinates of the telescope that we knew were
-part of SKA1_Mid until mid 2017. 
+[![Python 3.8+](https://img.shields.io/badge/python-3.8%2B-blue)](https://www.python.org/downloads/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
-<p align="center">
-  <img src="ska_uv.png" alt="SKA UV Coverage" width="500"/>
-  <br>
-  <em>Figure: UV coverage from 15 min of simulated observation out of SKA1_Mid.</em>
-</p>
+Simulate SKA1_Mid visibility (radio observations) using CASA toolkit. Create synthetic radio sky models at arbitrary redshifts and simulate realistic interferometric observations.
 
-SOS contains
---------------
+## 🌟 Features
 
-1. make_img.py : It makes a toy-model radio sky based on the inputs provided.
-	
-2. SOS.py : It simulates SKA visibility when a radio sky and SKA configuration file is provided.
+- **Radio Sky Modeling**: Create synthetic radio halo models at multiple redshifts
+- **Cosmological Calculations**: K-corrections and angular diameter distances using ΛCDM cosmology (Planck 2015)
+- **Visibility Simulation**: Simulate interferometric measurements using CASA toolkit
+- **Flexible Configuration**: YAML-based configuration for reproducible simulations
+- **Well-Tested Code**: Comprehensive unit tests for coordinate utilities and validators
+- **Python 3.8+**: Modern Python wi- **Python 3.8+**: Modern Python wi-
+- **Modular Architecture**: Clean separation of concerns for maintainability
 
-3. ska_mid197.cfg : configuration file containing antenna details of SKA1_Mid. List of 197 antennas (including MeerKAT).
+## 📋 Requirements
 
-4. ska_mid133.cfg : configuration file containing antenna details of SKA1_Mid. List of 133 antennas (excluding MeerKAT).
+- *- *- *- *- *- *- *- *- *- *- *- *- *- *- *- *- *- *- *- *- *- *- *-  simulations- *- *- *- *- *- *- *- *- *- *- *- *- *- *- *- *- *- *- *- *- *- *- *-  simulations- *- *- *- *- *- *- *- *- *-sh
+- *- *- *- *- *- *- *- *- *- *- *- *- *- *- *- *- *- *- *- *- *- *- *-  simulations- *- *- *- *- *- *- *- *- *- *- *- *- *- *- *- *- *- *- *- *- *- *- *-  simulations- *- *- *- \`\`- *- *- *- *- *sag- *- *- *- *- *- *- *- *- *- *- *- *- *- *- *- *- *- *- *- *- *- *- *-  simulatport- *- *- *- *- *- *- *- *- *- *- *- *- *- *- *- *- *- *- *- *- *- *- *-  simulations- *- *- *- *- *- *- *- *- *- er- *- *- *- *- *- *- *- *- *- *- *- *- *- *- *- *- *- *- *- *- *- *- *-  simulations-",- *- *- *- *- *- *- *- *- *- *- *- *- *- *- *- *- *- *- *- *- *- *- *-  simulatiltiple redshifts
+images = image_maker.create_model_sky(
+    redshifts=[0.1, 0.5, 1.0],
+    li    li    li    li    li    li    li    li    li    li    li    li    
+)
+\`\`\`
 
-5. ska_uv.png : sample uv coverage of SKA (15-min observation) for the inputs used in SOS.py file.
+#### 2. Using Configuration Files
 
-6. SOSv2.py : It simulates SKA visibility when a radio sky and SKA configuration file is provided in CASA versions > 4.7.2.
+\`\`\`python
+from sos.config.config_loader import ConfigLoader
 
-7. ska_mid197_new.cfg : New configuration file (for CASA 4.7.2+) containing antenna details of SKA1_Mid. List of 197 antennas (including MeerKAT).
+# Load configuration from YAML
+config = ConfigLoader("config.yaml")
 
-4. ska_mid133_new.cfg : New configuration file (for CASA 4.7.2+) containing antenna details of SKA1_Mid. List of 133 antennas (excluding MeerKAT).
+# Access values with dot notation
+redshifts = config.get("simulation.redshifts")
+spectral_index = config.get("simulation.spectral_index")
+\`\`\`
 
+#### 3. Simulating Visibility (in CASA)
 
+\`\`\`python
+from sos.core.visibility_sim import VisibilitySimulator
 
-*SOS works in CASA 4.7.2 or earlier.*
---------------------------------------
-*SOSv2.py which uses config file named as '*_new.cfg' runs in CASA versions > 4.7.2 *
---------------------------------------
+# Within CASA environment
+simulator = VisibilitySimulator(
+    config_file="ska_mid197_new.cfg",
+    spectral_index=-1.6,
+    channels=1,
+)
 
-Using instructions:
--------------------
-1) Run the script within CASA via -- execfile('script_name')
-2) Make sure SKA configuration file is in the same folder where your SOS script is.
+# Simulate visibility
+ms_path = simulator.simulate_visibility(
+    image_path="modelsky_0.1.im",
+    output_ms_path="visibility_0.1.ms",
+    num_scans=1,
+    scan_duration_sec=900.0,
+)
+\`\`\`
 
-Authors of SOS:
-----------------
+## 📁 Project Structure
 
-Deepak Deo and Dr. Ruta Kale
+\`\`\`
+SOS/
+├── sos/                          # Main package
+│   ├── __init__.py
+│   ├── constants.py              # Global const│   ├── constants.py              # Global const│   ├── con�   │   ├── image_maker.py        # Sky│   ├eati│   ├── constants.py              # G  # Vi│   ├── constants.py ── config/                   # Confi│   ├── ent
+│   │   └── config_loader.py      # YAML config handling
+│   └── utils/                    # Utility functions
+│       ├── coordinates.py        # RA/DEC conversions
+│       ├── logger.py             # Logging setup
+│       └── validators.py         # Input validation
+├── tests/       �                # Unit tests
+├── examples/                     # Example scripts & configs
+├── setup.py                      # Setup configuration
+├── pyproject.toml               # Project metadata
+├── requirements.txt             # Runtime dependencies
+└── README.md                    # This file
+\`\`\`
 
+## 🧪 Testing
+
+\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`\\`pe annotations
+✅ **Configuration Files**: YAML-based config system
+✅ **Comprehensive Logging**: Replaced print statements
+✅ **Input Validation**: Validates all inputs before processing
+✅ **Unit Tests**: 25+ tests for core functionality
+✅ **Py✅ **Py✅ **Py✅ **Py✅ **Py✅ **Py✅ **Py✅ **Py✅io✅ **Py✅ **Py✅ **Py✅ **Py✅ **Py✅ **ples
+- - - - - - - - - - - - - - - - - - - - - - - - - - -at)
+- Configurati- Configurati- Configurati- Configurati- Configurati- Configex- Configurati- Configurati- Configurati- Configuratiuthors- Configurati- Configurati- Configurati- Configurati- ConfiNCR- Configurati- Configurati- Configurati- Configur.0-  **Upd- Configuratuary 2026

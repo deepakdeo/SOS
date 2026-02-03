@@ -1,0 +1,25 @@
+# Development dependencies for SOS
+# Install with: pip install -r requirements-dev.txt
+
+-r requirements.txt
+
+# Testing
+pytest>=6.0
+pytest-cov>=2.10
+pytest-xdist>=2.3  # For parallel test execution
+
+# Code quality
+black>=21.0
+flake8>=3.9
+isort>=5.9
+mypy>=0.910
+
+# Documentation
+sphinx>=4.0
+sphinx-rtd-theme>=1.0
+sphinx-autodoc-typehints>=1.12
+
+# Build
+wheel>=0.36
+build>=0.7
+twine>=3.4

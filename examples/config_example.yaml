@@ -1,0 +1,90 @@
+"""Example configuration file for SOS simulations."""
+
+simulation:
+  # List of redshifts at which to create model images
+  redshifts:
+    - 0.05
+    - 0.1
+    - 0.13
+    - 0.15
+    - 0.17
+    - 0.2
+    - 0.3
+    - 0.4
+    - 0.5
+    - 0.6
+    - 0.8
+    - 0.9
+    - 1.0
+
+  # Spectral index for flux scaling (negative for radio sources)
+  spectral_index: -1.6
+
+  # Number of frequency channels
+  channels: 1
+
+  # Frequency resolution per channel in MHz
+  frequency_resolution_mhz: 50.0
+
+  # Integration time per sample
+  integration_time: "1s"
+
+source:
+  # Linear size of radio source/halo in Mpc
+  linear_size_mpc: 0.5
+
+  # Reference flux density in Jy
+  reference_flux_jy: 0.6
+
+  # Source type: 1=extended, 2=point, 3=mixed
+  source_type: 1
+
+image:
+  # Pixel cell size
+  cell_size: "0.01arcsec"
+
+  # Image size (number of pixels per side)
+  image_size: 7200
+
+  # Reference frequency for image
+  reference_frequency: "9.2GHz"
+
+telescope:
+  # Path to telescope configuration file
+  config_file: "ska_mid197_new.cfg"
+
+  # Elevation limit in degrees
+  elevation_limit: 17.0
+
+observation:
+  # Source rise time in CASA MJD format (e.g., "56839.0d")
+  rise_time: "56839.0d"
+
+  # Number of observation scans
+  num_scans: 1
+
+  # Start time of first scan in seconds
+  start_time_sec: 1.0
+
+  # Duration of each scan in seconds
+  scan_duration_sec: 900.0
+
+  # Gap between consecutive scans in seconds
+  scan_gap_sec: 0.0
+
+cosmology:
+  # Hubble constant in km/s/Mpc (Planck 2015)
+  h0: 67.8
+
+  # Matter density parameter Ω_m (Planck 2015)
+  omega_m: 0.308
+
+output:
+  # Output directory for images and measurement sets
+  output_dir: "./output"
+
+  # Output directory for log files
+  log_dir: "./logs"
+
+  # Verbosity level: DEBUG, INFO, WARNING, ERROR
+  log_level: "INFO"
